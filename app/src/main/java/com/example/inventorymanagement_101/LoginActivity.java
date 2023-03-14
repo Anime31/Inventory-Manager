@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
                     //authorize
-                    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                    startActivity(new Intent(LoginActivity.this, Dashborad2Activity.class));
 
                 }
                 else {

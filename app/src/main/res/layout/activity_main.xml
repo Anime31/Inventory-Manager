@@ -10,11 +10,11 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="410dp"
-        android:layout_height="143dp"
+        android:layout_height="163dp"
         android:layout_marginTop="100dp"
         android:text="Inventory Manager"
         android:textAlignment="center"
-        android:textSize="48sp"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
