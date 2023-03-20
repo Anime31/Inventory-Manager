@@ -25,5 +25,5 @@
         android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:srcCompat="@android:drawable/ic_search_category_default" />
 </androidx.constraintlayout.widget.ConstraintLayout>

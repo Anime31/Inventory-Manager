@@ -21,7 +21,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(DashboardActivity.this, AddProductActivity.class));
+                //move to dashboard2
+                startActivity(new Intent(DashboardActivity.this, Dashborad2Activity.class));
             }
         });
 
@@ -29,7 +30,8 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                startActivity(new Intent(DashboardActivity.this, DeleteProductActivity.class));
+                //move to searchActivity
+                startActivity(new Intent(DashboardActivity.this, SearchActivity.class));
             }
         });
     }

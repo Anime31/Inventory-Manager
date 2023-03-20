@@ -22,11 +22,9 @@ public class productModel {
 
     @Override
     public String toString() {
-        return "productModel{" +
-                "id=" + id +
+        return "id=" + id +
                 ", Name='" + Name + '\'' +
-                ", quantity=" + quantity +
-                '}';
+                ", quantity=" + quantity ;
     }
 
     public int getId() {
