@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Dashborad2Activity extends AppCompatActivity {
 
-    EditText et_productName, et_quantity;
+    EditText et_productName, et_quantity, et_price, et_threshold;
     Button btn_viewAll, btn_Add;
     ListView lv_productList;
     ArrayAdapter productArrayAdapter;
@@ -28,6 +28,8 @@ public class Dashborad2Activity extends AppCompatActivity {
 
         et_productName = findViewById(R.id.et_productName);
         et_quantity = findViewById(R.id.et_quantity);
+        et_price = findViewById(R.id.et_price);
+        et_threshold = findViewById(R.id.et_threshold);
         btn_viewAll = findViewById(R.id.btn_viewAll);
         btn_Add = findViewById(R.id.btn_add);
         lv_productList = findViewById(R.id.lv_productList);
@@ -56,8 +58,23 @@ public class Dashborad2Activity extends AppCompatActivity {
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
 
+
+                //if product is present just increment the quantity
+                productModel productModel1 = databaseHelper.findProduct(et_productName.getText().toString());
+
+                int increment = productModel1.getQuantity();
+                int prevQuantity = productModel.getQuantity();
+
+                productModel.setQuantity(prevQuantity + increment);
+
+                //if same product was found then delete that instance
+                if(increment != 0) {
+                    databaseHelper.deleteOne(productModel1);
+                }
+
+
                 boolean success = databaseHelper.addOne(productModel);
-                Toast.makeText(Dashborad2Activity.this, "success= " + success, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Dashborad2Activity.this, "success = " + success, Toast.LENGTH_SHORT).show();
 
                 ShowProductOnListView(databaseHelper);
             }
@@ -69,7 +86,6 @@ public class Dashborad2Activity extends AppCompatActivity {
                 DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
 
                 ShowProductOnListView(databaseHelper);
-
 //                Toast.makeText(Dashborad2Activity.this, allProduct.toString(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -9,15 +9,17 @@ import android.widget.ImageButton;
 
 public class DashboardActivity extends AppCompatActivity {
 
+    ImageButton btn_add, btn_search, btn_newCustomer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        ImageButton addbtn = (ImageButton) findViewById(R.id.imageButton);
-        ImageButton deletebtn = (ImageButton) findViewById(R.id.imageButton2);
+        btn_add = findViewById(R.id.imageButton);
+        btn_search = findViewById(R.id.imageButton2);
+        btn_newCustomer = findViewById(R.id.imageButton3);
 
-        addbtn.setOnClickListener(new View.OnClickListener() {
+        btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -26,12 +28,21 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        deletebtn.setOnClickListener(new View.OnClickListener() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //move to searchActivity
                 startActivity(new Intent(DashboardActivity.this, SearchActivity.class));
+            }
+        });
+
+        btn_newCustomer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //move to newCustomerActivity
+                startActivity(new Intent(DashboardActivity.this, NewCustomerActivity.class));
             }
         });
     }
