@@ -47,13 +47,14 @@ public class Dashborad2Activity extends AppCompatActivity {
                 //check for invalid entry
                 try {
                      productModel = new productModel(-1,et_productName.getText().toString(),
-                            Integer.parseInt(et_quantity.getText().toString()));
+                            Integer.parseInt(et_quantity.getText().toString()),
+                             Integer.parseInt(et_price.getText().toString()));
 
                     Toast.makeText(Dashborad2Activity.this, productModel.toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     Toast.makeText(Dashborad2Activity.this, "Error Creating product", Toast.LENGTH_SHORT).show();
-                    productModel = new productModel(-1, "error", 0);
+                    productModel = new productModel(-1, "error", 0,0);
                 }
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);

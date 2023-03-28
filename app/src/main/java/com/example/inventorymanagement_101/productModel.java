@@ -13,11 +13,11 @@ public class productModel {
 
 
     //constructors
-    public productModel(int id, String name, int quantity) {
+    public productModel(int id, String name, int quantity, int price) {
         this.id = id;
         Name = name;
         this.quantity = quantity;
-//        this.price = price;
+        this.price = price;
 //        this.threshold = threshold;
     }
 
@@ -25,12 +25,13 @@ public class productModel {
     }
 
 
-    //toString is neccesary to print content of a class object
     @Override
     public String toString() {
         return "id=" + id +
                 ", Name='" + Name + '\'' +
-                ", quantity=" + quantity ;
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", threshold=" + threshold;
     }
 
     public int getId() {

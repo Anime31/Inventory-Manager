@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00BCD4"
+    android:background="@drawable/wall2"
     tools:context=".Dashborad2Activity">
 
     <EditText
@@ -56,8 +56,8 @@
 
     <ListView
         android:id="@+id/lv_productList"
-        android:layout_width="409dp"
-        android:layout_height="555dp"
+        android:layout_width="407dp"
+        android:layout_height="460dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_viewAll" />
