@@ -98,6 +98,7 @@ public class NewCustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 tv_total.setText("Rs " + String.valueOf(totalSum));
+                et_bill.append("\nTotal Paid Amount: Rs " + String.valueOf(totalSum));
             }
         });
 

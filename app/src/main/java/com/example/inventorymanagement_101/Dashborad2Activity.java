@@ -2,6 +2,7 @@ package com.example.inventorymanagement_101;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -91,18 +92,29 @@ public class Dashborad2Activity extends AppCompatActivity {
             }
         });
 
+
+        //on clicking a product open its details
         lv_productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
-                databaseHelper.deleteOne(clickedProduct);
+//                databaseHelper.deleteOne(clickedProduct);
+//
+//                ShowProductOnListView(databaseHelper);
+//
+//                Toast.makeText(Dashborad2Activity.this, "Deleted " + clickedProduct.toString(), Toast.LENGTH_SHORT).show();
 
-                ShowProductOnListView(databaseHelper);
+                String str = clickedProduct.getName();
+                Intent intent = new Intent(Dashborad2Activity.this, ProductDetailsActivity.class);
+                intent.putExtra("key@123", str);
 
-                Toast.makeText(Dashborad2Activity.this, "Deleted " + clickedProduct.toString(), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
+
+
+
     }
 
     private void ShowProductOnListView(DatabaseHelper databaseHelper) {
