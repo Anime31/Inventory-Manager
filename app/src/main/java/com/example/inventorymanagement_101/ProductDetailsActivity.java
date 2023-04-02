@@ -50,12 +50,43 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
 
+
+        btn_removeDamaged.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int damagedQuantity = Integer.parseInt(et_damaged.getText().toString());
+                int currentQuantity = product.getQuantity();
+
+                if(currentQuantity >= damagedQuantity) {
+                    int newQuantity = currentQuantity - damagedQuantity;
+                    product.setQuantity(newQuantity);
+
+                    //delete product
+                    databaseHelper.deleteOne(product);
+
+                    //add product with new quantity(>0)
+                    if(newQuantity > 0) {
+                        databaseHelper.addOne(product);
+                    }
+
+                    Toast.makeText(ProductDetailsActivity.this, "Successfully Removed " + damagedQuantity + " item(s)", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(ProductDetailsActivity.this, "Not Sufficient Quantity Available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         btn_deleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 databaseHelper.deleteOne(product);
                 Toast.makeText(ProductDetailsActivity.this, "Deleted " + product.getName(), Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(ProductDetailsActivity.this,Dashborad2Activity.class));
             }
         });
 

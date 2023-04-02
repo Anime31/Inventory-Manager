@@ -61,21 +61,25 @@ public class Dashborad2Activity extends AppCompatActivity {
                 DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
 
 
-                //if product is present just increment the quantity
+                //if product is present then increment the quantity
                 productModel productModel1 = databaseHelper.findProduct(et_productName.getText().toString());
 
-                int increment = productModel1.getQuantity();
-                int prevQuantity = productModel.getQuantity();
+                int previousQuantity = productModel1.getQuantity();
+                int increment = productModel.getQuantity();
 
-                productModel.setQuantity(prevQuantity + increment);
+//                System.out.println(previousQuantity);
+//                System.out.println(increment);
+
+                productModel.setQuantity(increment + previousQuantity);
 
                 //if same product was found then delete that instance
-                if(increment != 0) {
+                if(previousQuantity != 0) {
                     databaseHelper.deleteOne(productModel1);
                 }
 
 
                 boolean success = databaseHelper.addOne(productModel);
+
                 Toast.makeText(Dashborad2Activity.this, "success = " + success, Toast.LENGTH_SHORT).show();
 
                 ShowProductOnListView(databaseHelper);

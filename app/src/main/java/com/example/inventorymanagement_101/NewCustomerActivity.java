@@ -109,10 +109,16 @@ public class NewCustomerActivity extends AppCompatActivity {
                 String message = et_bill.getText().toString();
                 String number = et_phone.getText().toString();
 
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(number, null, message, null,null);
+                if(number.equals("")) {
+                    Toast.makeText(NewCustomerActivity.this, "Enter mobile number", Toast.LENGTH_SHORT).show();
+                }
+                else {
 
-                Toast.makeText(NewCustomerActivity.this, "Bill Sent Successfully", Toast.LENGTH_SHORT).show();
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(number, null, message, null, null);
+
+                    Toast.makeText(NewCustomerActivity.this, "Bill Sent Successfully", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
