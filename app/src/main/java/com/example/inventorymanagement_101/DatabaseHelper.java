@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "product1.db", null, 1);
+        super(context, "product2.db", null, 1);
 
     }
 
@@ -33,8 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String createTableStatement = "CREATE TABLE " + PRODUCT_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_QUANTITY + " INT, " + COLUMN_PRICE + " INT )";
-//        + COLUMN_THRESHOLD + " INT) ";
+                + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_QUANTITY + " INT, " + COLUMN_PRICE + " INT, " + COLUMN_THRESHOLD + " INT )";
 
         db.execSQL(createTableStatement);
 
@@ -53,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_PRODUCT_NAME, productModel.getName());
         cv.put(COLUMN_PRODUCT_QUANTITY, productModel.getQuantity());
         cv.put(COLUMN_PRICE, productModel.getPrice());
-//        cv.put(COLUMN_THRESHOLD, productModel.getThreshold());
+        cv.put(COLUMN_THRESHOLD, productModel.getThreshold());
 
         long insert = db.insert(PRODUCT_TABLE, null, cv);
 
@@ -99,13 +98,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String productName = cursor.getString(1);
                 int productQuantity = cursor.getInt(2);
                 int productPrice = cursor.getInt(3);
-//                int productThreshold = cursor.getInt(4);
+                int productThreshold = cursor.getInt(4);
 
 
                 if(Objects.equals(productName, s)) {
 //                    System.out.println("found");
 
-                    return new productModel(productID,productName,productQuantity,productPrice);
+                    return new productModel(productID,productName,productQuantity,productPrice,productThreshold);
                 }
 
             }while (cursor.moveToNext());
@@ -118,10 +117,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        return new productModel(-1,"N/A",0,0);
+        return new productModel(-1,"N/A",0,0,0);
     }
 
-    public void updateProduct(String s, int newQuantity) {
+    //update the quantity of product with PRODUCT_NAME = productName
+    public void updateProduct(productModel product, int newQuantity) {
+
+        int productID = product.getId();
+        String productName = product.getName();
+        int productQuantity = product.getQuantity();
+        int productPrice = product.getPrice();
+        int productThreshold = product.getThreshold();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_PRODUCT_NAME, productName);
+        cv.put(COLUMN_PRODUCT_QUANTITY, newQuantity);
+        cv.put(COLUMN_PRICE, productPrice);
+        cv.put(COLUMN_THRESHOLD, productThreshold);
+
+        db.update(PRODUCT_TABLE, cv, "PRODUCT_NAME=?", new String[]{productName});
+        db.close();
 
     }
 
@@ -145,9 +162,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String productName = cursor.getString(1);
                 int productQuantity = cursor.getInt(2);
                 int productPrice = cursor.getInt(3);
-//                int productThreshold = cursor.getInt(4);
+                int productThreshold = cursor.getInt(4);
 
-                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice);
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold);
 
                 returnList.add(newProduct);
 

@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    ImageButton btn_add, btn_search, btn_newCustomer;
+    ImageButton btn_add, btn_search, btn_newCustomer, btn_info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +18,7 @@ public class DashboardActivity extends AppCompatActivity {
         btn_add = findViewById(R.id.imageButton);
         btn_search = findViewById(R.id.imageButton2);
         btn_newCustomer = findViewById(R.id.imageButton3);
+        btn_info = findViewById(R.id.btn_info);
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,15 @@ public class DashboardActivity extends AppCompatActivity {
 
                 //move to searchActivity
                 startActivity(new Intent(DashboardActivity.this, SearchActivity.class));
+            }
+        });
+
+        btn_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //move to InventoryControl Activity
+                startActivity(new Intent(DashboardActivity.this, InventoryControlActivity.class));
             }
         });
 

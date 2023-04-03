@@ -47,7 +47,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tv_showId.setText(String.valueOf(product.getId()));
         tv_showQuantity.setText(String.valueOf(product.getQuantity()));
         tv_showPrice.setText(String.valueOf(product.getPrice()));
-
+        tv_showThreshold.setText(String.valueOf(product.getThreshold()));
 
 
 
@@ -59,18 +59,29 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 int currentQuantity = product.getQuantity();
 
                 if(currentQuantity >= damagedQuantity) {
+                    //update the quantity
+
                     int newQuantity = currentQuantity - damagedQuantity;
-                    product.setQuantity(newQuantity);
 
-                    //delete product
-                    databaseHelper.deleteOne(product);
+                    databaseHelper.updateProduct(product,newQuantity);
 
-                    //add product with new quantity(>0)
-                    if(newQuantity > 0) {
-                        databaseHelper.addOne(product);
+                    if(newQuantity==0) {
+                        databaseHelper.deleteOne(product);
                     }
 
+//                    product.setQuantity(newQuantity);
+//
+//                    //delete product
+//                    databaseHelper.deleteOne(product);
+//
+//                    //add product with new quantity(>0)
+//                    if(newQuantity > 0) {
+//                        databaseHelper.addOne(product);
+//                    }
+
                     Toast.makeText(ProductDetailsActivity.this, "Successfully Removed " + damagedQuantity + " item(s)", Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(ProductDetailsActivity.this,Dashborad2Activity.class));
 
                 }
                 else {

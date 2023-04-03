@@ -13,12 +13,12 @@ public class productModel {
 
 
     //constructors
-    public productModel(int id, String name, int quantity, int price) {
+    public productModel(int id, String name, int quantity, int price, int threshold) {
         this.id = id;
         Name = name;
         this.quantity = quantity;
         this.price = price;
-//        this.threshold = threshold;
+        this.threshold = threshold;
     }
 
     public productModel() {

@@ -49,7 +49,6 @@ public class NewCustomerActivity extends AppCompatActivity {
         btn_sendBill = findViewById(R.id.btn_sendBill);
         tv_total = findViewById(R.id.tv_total);
 
-
         btn_addToBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +95,12 @@ public class NewCustomerActivity extends AppCompatActivity {
         btn_total.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String str = "Dear " + et_customerName.getText().toString() + ", Thanks for buying:\n" + et_bill.getText().toString();
+//                String bill = ;
+//                bill = str + bill;
+
+                et_bill.setText(str);
 
                 tv_total.setText("Rs " + String.valueOf(totalSum));
                 et_bill.append("\nTotal Paid Amount: Rs " + String.valueOf(totalSum));
