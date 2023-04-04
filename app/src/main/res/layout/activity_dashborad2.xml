@@ -39,11 +39,11 @@
         android:id="@+id/btn_viewAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="View All"
         app:layout_constraintEnd_toStartOf="@+id/btn_add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_threshold" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_expiryDatePicker" />
 
     <Button
         android:id="@+id/btn_add"
@@ -56,8 +56,8 @@
 
     <ListView
         android:id="@+id/lv_productList"
-        android:layout_width="407dp"
-        android:layout_height="460dp"
+        android:layout_width="404dp"
+        android:layout_height="370dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_viewAll" />
@@ -89,4 +89,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_price" />
+
+    <Button
+        android:id="@+id/btn_expiryDatePicker"
+        style="?android:spinnerStyle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="openDatePicker"
+        android:text="JAN 01 2023"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_expDate"
+        app:layout_constraintTop_toBottomOf="@+id/et_threshold" />
+
+    <TextView
+        android:id="@+id/tv_expDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exp Date:"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toStartOf="@id/btn_expiryDatePicker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_expiryDatePicker" />
 </androidx.constraintlayout.widget.ConstraintLayout>
