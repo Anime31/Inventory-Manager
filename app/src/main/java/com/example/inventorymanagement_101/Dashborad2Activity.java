@@ -28,6 +28,8 @@ public class Dashborad2Activity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     Button btn_expiryDatePicker;
 
+    private int addedDateInt, expiryDateInt;    //yyyymmdd
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,9 @@ public class Dashborad2Activity extends AppCompatActivity {
         initDatePicker();
         btn_expiryDatePicker.setText(getTodaysDate());
 
+
+//        System.out.println(btn_expiryDatePicker.getText().toString());
+
         //listners
         btn_Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +65,15 @@ public class Dashborad2Activity extends AppCompatActivity {
                      productModel = new productModel(-1,et_productName.getText().toString(),
                              Integer.parseInt(et_quantity.getText().toString()),
                              Integer.parseInt(et_price.getText().toString()),
-                             Integer.parseInt(et_threshold.getText().toString()));
+                             Integer.parseInt(et_threshold.getText().toString()),
+                             addedDateInt,
+                             expiryDateInt);
 
                     Toast.makeText(Dashborad2Activity.this, productModel.toString(), Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e) {
                     Toast.makeText(Dashborad2Activity.this, "Error Creating product", Toast.LENGTH_SHORT).show();
-                    productModel = new productModel(-1, "error", 0,0,0);
+                    productModel = new productModel(-1, "error", 0,0,0,0,0);
                 }
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
@@ -122,8 +129,6 @@ public class Dashborad2Activity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void ShowProductOnListView(DatabaseHelper databaseHelper) {
@@ -138,6 +143,13 @@ public class Dashborad2Activity extends AppCompatActivity {
         int month = cal.get(Calendar.MONTH);
         month = month + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        addedDateInt = year*10000 + month*100 + day;
+        expiryDateInt = year*10000 + month*100 + day;
+
+//        System.out.println(addedDateInt);
+//        System.out.println(expiryDateInt);
+
         return makeDateString(day, month, year);
     }
 
@@ -149,6 +161,10 @@ public class Dashborad2Activity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day)
             {
                 month = month + 1;
+
+                expiryDateInt = year*10000 + month*100 + day;
+//                System.out.println(expiryDateInt);
+
                 String date = makeDateString(day, month, year);
                 btn_expiryDatePicker.setText(date);
             }
@@ -162,7 +178,7 @@ public class Dashborad2Activity extends AppCompatActivity {
         int style = android.R.style.Theme_Holo_Light_Dialog_MinWidth;
 
         datePickerDialog = new DatePickerDialog(Dashborad2Activity.this, style, dateSetListener, year, month, day);
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);   //subtracted 1 sec from current time
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);   //subtracted 1 sec from current time
 
     }
 

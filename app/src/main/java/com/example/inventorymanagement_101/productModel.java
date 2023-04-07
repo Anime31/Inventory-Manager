@@ -9,16 +9,20 @@ public class productModel {
     private int quantity;
     private int price;
     private int threshold;
+    private int addedDate;
+    private int expiryDate;
 //    private Date expiryDate;
 
 
     //constructors
-    public productModel(int id, String name, int quantity, int price, int threshold) {
+    public productModel(int id, String name, int quantity, int price, int threshold, int addedDate, int expiryDate) {
         this.id = id;
         Name = name;
         this.quantity = quantity;
         this.price = price;
         this.threshold = threshold;
+        this.addedDate = addedDate;
+        this.expiryDate = expiryDate;
     }
 
     public productModel() {
@@ -72,5 +76,21 @@ public class productModel {
 
     public void setThreshold(int threshold) {
         this.threshold = threshold;
+    }
+
+    public int getAddedDate() {
+        return addedDate;
+    }
+
+    public void setAddedDate(int addedDate) {
+        this.addedDate = addedDate;
+    }
+
+    public int getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(int expiryDate) {
+        this.expiryDate = expiryDate;
     }
 }

@@ -97,8 +97,6 @@ public class NewCustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String str = "Dear " + et_customerName.getText().toString() + ", Thanks for buying:\n" + et_bill.getText().toString();
-//                String bill = ;
-//                bill = str + bill;
 
                 et_bill.setText(str);
 
@@ -113,8 +111,14 @@ public class NewCustomerActivity extends AppCompatActivity {
 
                 String message = et_bill.getText().toString();
                 String number = et_phone.getText().toString();
+                String name = et_customerName.getText().toString();
 
-                if(number.equals("")) {
+                if(name.equals("")) {
+                    et_customerName.setError("Field cannot be left blank.");
+                    Toast.makeText(NewCustomerActivity.this, "Enter Customer's Name", Toast.LENGTH_SHORT).show();
+                }
+                else if(number.equals("")) {
+                    et_phone.setError("Field cannot be left blank.");
                     Toast.makeText(NewCustomerActivity.this, "Enter mobile number", Toast.LENGTH_SHORT).show();
                 }
                 else {

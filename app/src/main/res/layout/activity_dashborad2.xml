@@ -17,6 +17,10 @@
         android:ems="10"
         android:hint="@string/ProductName"
         android:inputType="textPersonName"
+        android:padding="10dp"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +35,10 @@
         android:ems="10"
         android:hint="@string/Quantity"
         android:inputType="number"
+        android:padding="10dp"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_productName" />
@@ -72,6 +80,10 @@
         android:ems="10"
         android:hint="MRP"
         android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_quantity" />
@@ -86,6 +98,10 @@
         android:ems="10"
         android:hint="Min Limit"
         android:inputType="number"
+        android:padding="10dp"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_price" />
