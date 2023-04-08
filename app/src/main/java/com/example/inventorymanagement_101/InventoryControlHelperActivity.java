@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,15 +37,31 @@ public class InventoryControlHelperActivity extends AppCompatActivity {
         if(Objects.equals(str, "Scarce Items")) {
 
             productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getScarce());
-            lv_inventoryHelper.setAdapter(productArrayAdapter);
-
         }
         else if (Objects.equals(str,"Expired Items")) {
-
+            productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getExpired());
         }
         else {
-
+            productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getPerishable());
         }
+
+        lv_inventoryHelper.setAdapter(productArrayAdapter);
+
+        //on clicking a product open its details
+
+//        lv_inventoryHelper.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
+//
+//                String str = clickedProduct.getName();
+//                Intent intent = new Intent(InventoryControlHelperActivity.this, ProductDetailsActivity.class);
+//                intent.putExtra("key@123", str);
+//
+//                startActivity(intent);
+//            }
+//        });
 
     }
 }

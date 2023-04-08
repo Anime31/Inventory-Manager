@@ -8,8 +8,8 @@
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_width="396dp"
+        android:layout_height="306dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -146,6 +146,25 @@
 
         <TableRow
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_wastage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wastage"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_showWastage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Wastage"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
@@ -171,6 +190,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
+        android:backgroundTint="#00BCD4"
         android:text="Remove"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,11 +200,11 @@
         android:id="@+id/tv_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Remove Item"
+        android:text="Wasted Item:"
         android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@id/et_damaged"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/et_damaged"
-        app:layout_constraintEnd_toStartOf="@id/et_damaged"/>
+        app:layout_constraintTop_toTopOf="@+id/et_damaged" />
 
     <Button
         android:id="@+id/btn_deleteProduct"
@@ -193,6 +213,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="50dp"
+        android:backgroundTint="#FF0000"
+        android:drawableLeft="@drawable/baseline_delete_24"
         android:text="Delete Product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -11,11 +11,11 @@ public class productModel {
     private int threshold;
     private int addedDate;
     private int expiryDate;
-//    private Date expiryDate;
+    private int wastage;
 
 
     //constructors
-    public productModel(int id, String name, int quantity, int price, int threshold, int addedDate, int expiryDate) {
+    public productModel(int id, String name, int quantity, int price, int threshold, int addedDate, int expiryDate, int wastage) {
         this.id = id;
         Name = name;
         this.quantity = quantity;
@@ -23,6 +23,7 @@ public class productModel {
         this.threshold = threshold;
         this.addedDate = addedDate;
         this.expiryDate = expiryDate;
+        this.wastage = wastage;
     }
 
     public productModel() {
@@ -92,5 +93,13 @@ public class productModel {
 
     public void setExpiryDate(int expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public int getWastage() {
+        return wastage;
+    }
+
+    public void setWastage(int wastage) {
+        this.wastage = wastage;
     }
 }

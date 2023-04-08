@@ -67,34 +67,44 @@ public class Dashborad2Activity extends AppCompatActivity {
                              Integer.parseInt(et_price.getText().toString()),
                              Integer.parseInt(et_threshold.getText().toString()),
                              addedDateInt,
-                             expiryDateInt);
+                             expiryDateInt, 0);
 
                     Toast.makeText(Dashborad2Activity.this, productModel.toString(), Toast.LENGTH_SHORT).show();
+
+
+                    DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
+
+                    // If product is present then increment the quantity
+                    productModel productModel1 = databaseHelper.findProduct(et_productName.getText().toString());
+
+                    int previousQuantity = productModel1.getQuantity();
+                    int increment = productModel.getQuantity();
+
+                    //if same product was found then update that
+                    if(previousQuantity != 0) {
+
+                        databaseHelper.updateProduct(productModel1, previousQuantity+increment);
+
+                        Toast.makeText(Dashborad2Activity.this, "Added " + increment +" item(s) of " + productModel1.getName().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        boolean success = databaseHelper.addOne(productModel);
+
+                        Toast.makeText(Dashborad2Activity.this, "success = " + success, Toast.LENGTH_SHORT).show();
+                    }
+
+                    //if quantity is 0 then delete the product
+                    if(productModel1.getQuantity()==0) {
+                        System.out.println(productModel1.getQuantity());
+                        databaseHelper.deleteOne(productModel1);
+                    }
+
                 }
                 catch (Exception e) {
                     Toast.makeText(Dashborad2Activity.this, "Error Creating product", Toast.LENGTH_SHORT).show();
-                    productModel = new productModel(-1, "error", 0,0,0,0,0);
+//                    productModel = new productModel(-1, "error", 0,0,0,currentDate(),currentDate(),0);
                 }
 
-                DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
-
-
-                //if product is present then increment the quantity
-                productModel productModel1 = databaseHelper.findProduct(et_productName.getText().toString());
-
-                int previousQuantity = productModel1.getQuantity();
-                int increment = productModel.getQuantity();
-
-                //if same product was found then update that
-                if(previousQuantity != 0) {
-                    databaseHelper.updateProduct(productModel1, previousQuantity+increment);
-                    Toast.makeText(Dashborad2Activity.this, "Added " + increment +" item(s) of " + productModel1.getName().toString(), Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    boolean success = databaseHelper.addOne(productModel);
-
-                    Toast.makeText(Dashborad2Activity.this, "success = " + success, Toast.LENGTH_SHORT).show();
-                }
 
                 ShowProductOnListView(databaseHelper);
             }
@@ -116,10 +126,6 @@ public class Dashborad2Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
-
-//                databaseHelper.deleteOne(clickedProduct);
-//                ShowProductOnListView(databaseHelper);
-//                Toast.makeText(Dashborad2Activity.this, "Deleted " + clickedProduct.toString(), Toast.LENGTH_SHORT).show();
 
                 String str = clickedProduct.getName();
                 Intent intent = new Intent(Dashborad2Activity.this, ProductDetailsActivity.class);
@@ -151,6 +157,16 @@ public class Dashborad2Activity extends AppCompatActivity {
 //        System.out.println(expiryDateInt);
 
         return makeDateString(day, month, year);
+    }
+
+    int currentDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        return year*10000 + month*100 + day;
     }
 
     private void initDatePicker()

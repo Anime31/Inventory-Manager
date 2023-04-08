@@ -3,6 +3,7 @@ package com.example.inventorymanagement_101;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,9 +11,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    TextView tv_productName, tv_showId, tv_showQuantity, tv_showPrice, tv_showExpiryDate, tv_showAddedDate, tv_showThreshold;
+    TextView tv_productName, tv_showId, tv_showQuantity, tv_showPrice, tv_showExpiryDate, tv_showAddedDate, tv_showThreshold, tv_showWastage;
     EditText et_damaged;
     Button btn_removeDamaged, btn_deleteProduct;
 
@@ -30,6 +33,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tv_showExpiryDate = findViewById(R.id.tv_showExpiryDate);
         tv_showAddedDate = findViewById(R.id.tv_showAddedDate);
         tv_showThreshold = findViewById(R.id.tv_showThreshold);
+        tv_showWastage = findViewById(R.id.tv_showWastage);
 
         et_damaged = findViewById(R.id.et_damaged);
         btn_removeDamaged = findViewById(R.id.btn_removeDamaged);
@@ -48,12 +52,25 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tv_showQuantity.setText(String.valueOf(product.getQuantity()));
         tv_showPrice.setText(String.valueOf(product.getPrice()));
         tv_showThreshold.setText(String.valueOf(product.getThreshold()));
+        tv_showAddedDate.setText(convertDate(product.getAddedDate()));
+        tv_showExpiryDate.setText(convertDate(product.getExpiryDate()));
+        tv_showWastage.setText(String.valueOf(product.getWastage()));
 
+        if(product.getQuantity() < product.getThreshold()) {
+            tv_showQuantity.setTextColor(Color.RED);
+            tv_showQuantity.setError("Low Quantity");
+        }
+        if(currentDate() >= product.getExpiryDate()) {
+            tv_showExpiryDate.setTextColor(Color.RED);
+            tv_showExpiryDate.setError("Item Expired!");
+        }
 
 
         btn_removeDamaged.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+//                databaseHelper = new DatabaseHelper(ProductDetailsActivity.this);
 
                 int damagedQuantity = Integer.parseInt(et_damaged.getText().toString());
                 int currentQuantity = product.getQuantity();
@@ -69,18 +86,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         databaseHelper.deleteOne(product);
                     }
 
-//                    product.setQuantity(newQuantity);
-//
-//                    //delete product
-//                    databaseHelper.deleteOne(product);
-//
-//                    //add product with new quantity(>0)
-//                    if(newQuantity > 0) {
-//                        databaseHelper.addOne(product);
-//                    }
+                    //increment in wastage of this product
+                    databaseHelper.addWastage(product, damagedQuantity);
 
                     Toast.makeText(ProductDetailsActivity.this, "Successfully Removed " + damagedQuantity + " item(s)", Toast.LENGTH_SHORT).show();
-
                     startActivity(new Intent(ProductDetailsActivity.this,Dashborad2Activity.class));
 
                 }
@@ -101,5 +110,31 @@ public class ProductDetailsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String convertDate(int x) {
+//        yyyymmdd
+
+        String str = "";
+        String date = String.valueOf(x);
+
+        str += date.substring(6);
+        str += '-';
+        str += date.substring(4,6);
+        str += '-';
+        str += date.substring(0,4);
+
+        return str;
+
+    }
+
+    int currentDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        return year*10000 + month*100 + day;
     }
 }
