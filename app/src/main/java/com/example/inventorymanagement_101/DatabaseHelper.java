@@ -25,10 +25,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_EXPIRY_DATE = "EXPIRY_DATE";
     public static final String COLUMN_ADDED_DATE = "ADDED_DATE";
     public static final String COLUMN_WASTAGE = "WASTAGE";
+    public static final String COLUMN_BATCH_NUMBER = "BATCH_NUMBER";
 
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "product5.db", null, 1);
+        super(context, "product6.db", null, 1);
 
     }
 
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTableStatement = "CREATE TABLE " + PRODUCT_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_PRODUCT_NAME + " TEXT, " + COLUMN_PRODUCT_QUANTITY + " INT, " + COLUMN_PRICE + " INT, " + COLUMN_THRESHOLD + " INT, "
-                + COLUMN_ADDED_DATE + " INT, " + COLUMN_EXPIRY_DATE + " INT, " + COLUMN_WASTAGE + " INT )";
+                + COLUMN_ADDED_DATE + " INT, " + COLUMN_EXPIRY_DATE + " INT, " + COLUMN_WASTAGE + " INT, " + COLUMN_BATCH_NUMBER + " INT )";
 
         db.execSQL(createTableStatement);
 
@@ -59,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_THRESHOLD, productModel.getThreshold());
         cv.put(COLUMN_ADDED_DATE, productModel.getAddedDate());
         cv.put(COLUMN_EXPIRY_DATE, productModel.getExpiryDate());
+        cv.put(COLUMN_BATCH_NUMBER, productModel.getBatchNumber());
 
         long insert = db.insert(PRODUCT_TABLE, null, cv);
 
@@ -108,12 +110,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int productAdded = cursor.getInt(5);
                 int productExpiry = cursor.getInt(6);
                 int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
 
 
                 if(Objects.equals(productName, s)) {
 //                    System.out.println("found");
 
-                    return new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage);
+                    return new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
                 }
 
             }while (cursor.moveToNext());
@@ -126,7 +129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        return new productModel(-1,"N/A",0,0,0,currentDate(),currentDate(),0);
+        return new productModel(-1,"N/A",0,0,0,currentDate(),currentDate(),0,0);
     }
 
     //update the quantity of product with PRODUCT_NAME = productName
@@ -183,8 +186,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int productAdded = cursor.getInt(5);
                 int productExpiry = cursor.getInt(6);
                 int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
 
-                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage);
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
 
                 returnList.add(newProduct);
 
@@ -224,8 +228,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int productAdded = cursor.getInt(5);
                 int productExpiry = cursor.getInt(6);
                 int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
 
-                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage);
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
 
                 returnList.add(newProduct);
 
@@ -265,8 +270,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int productAdded = cursor.getInt(5);
                 int productExpiry = cursor.getInt(6);
                 int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
 
-                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage);
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
 
                 returnList.add(newProduct);
 
@@ -316,8 +322,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int productAdded = cursor.getInt(5);
                 int productExpiry = cursor.getInt(6);
                 int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
 
-                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage);
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
 
                 returnList.add(newProduct);
 

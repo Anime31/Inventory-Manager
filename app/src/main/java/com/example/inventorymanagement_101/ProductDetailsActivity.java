@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    TextView tv_productName, tv_showId, tv_showQuantity, tv_showPrice, tv_showExpiryDate, tv_showAddedDate, tv_showThreshold, tv_showWastage;
+    TextView tv_productName, tv_showId, tv_showQuantity, tv_showPrice, tv_showExpiryDate, tv_showAddedDate, tv_showThreshold, tv_showWastage, tv_showBatchNum;
     EditText et_damaged;
     Button btn_removeDamaged, btn_deleteProduct;
 
@@ -34,6 +34,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         tv_showAddedDate = findViewById(R.id.tv_showAddedDate);
         tv_showThreshold = findViewById(R.id.tv_showThreshold);
         tv_showWastage = findViewById(R.id.tv_showWastage);
+        tv_showBatchNum = findViewById(R.id.tv_showBatchNum);
 
         et_damaged = findViewById(R.id.et_damaged);
         btn_removeDamaged = findViewById(R.id.btn_removeDamaged);
@@ -49,6 +50,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productModel product = databaseHelper.findProduct(str);
 
         tv_showId.setText(String.valueOf(product.getId()));
+        tv_showBatchNum.setText(String.valueOf(product.getBatchNumber()));
         tv_showQuantity.setText(String.valueOf(product.getQuantity()));
         tv_showPrice.setText(String.valueOf(product.getPrice()));
         tv_showThreshold.setText(String.valueOf(product.getThreshold()));

@@ -8,8 +8,8 @@
 
     <TableLayout
         android:id="@+id/tableLayout2"
-        android:layout_width="396dp"
-        android:layout_height="306dp"
+        android:layout_width="384dp"
+        android:layout_height="330dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +46,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="ID"
+                android:textSize="20sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_batchNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batch No."
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_showBatchNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Batch No."
                 android:textSize="20sp" />
         </TableRow>
 

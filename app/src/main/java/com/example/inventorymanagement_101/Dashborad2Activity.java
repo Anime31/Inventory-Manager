@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Dashborad2Activity extends AppCompatActivity {
 
-    EditText et_productName, et_quantity, et_price, et_threshold;
+    EditText et_productName, et_batch, et_quantity, et_price, et_threshold;
     Button btn_viewAll, btn_Add;
     ListView lv_productList;
     ArrayAdapter productArrayAdapter;
@@ -36,6 +36,7 @@ public class Dashborad2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_dashborad2);
 
         et_productName = findViewById(R.id.et_productName);
+        et_batch = findViewById(R.id.et_batch);
         et_quantity = findViewById(R.id.et_quantity);
         et_price = findViewById(R.id.et_price);
         et_threshold = findViewById(R.id.et_threshold);
@@ -67,7 +68,8 @@ public class Dashborad2Activity extends AppCompatActivity {
                              Integer.parseInt(et_price.getText().toString()),
                              Integer.parseInt(et_threshold.getText().toString()),
                              addedDateInt,
-                             expiryDateInt, 0);
+                             expiryDateInt, 0,
+                             Integer.parseInt(et_batch.getText().toString()));
 
                     Toast.makeText(Dashborad2Activity.this, productModel.toString(), Toast.LENGTH_SHORT).show();
 
@@ -95,7 +97,6 @@ public class Dashborad2Activity extends AppCompatActivity {
 
                     //if quantity is 0 then delete the product
                     if(productModel1.getQuantity()==0) {
-                        System.out.println(productModel1.getQuantity());
                         databaseHelper.deleteOne(productModel1);
                     }
 

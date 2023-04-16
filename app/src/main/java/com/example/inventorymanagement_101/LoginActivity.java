@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         TextView password = (TextView) findViewById(R.id.editTextPassword);
 
         Button loginbtn = (Button) findViewById(R.id.btnLogin);
-        Button btn_signup = findViewById(R.id.btn_signup);
+        Button btn_changeLogin = findViewById(R.id.btn_changeLogin);
 
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btn_signup.setOnClickListener(new View.OnClickListener() {
+        btn_changeLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));

@@ -12,10 +12,12 @@ public class productModel {
     private int addedDate;
     private int expiryDate;
     private int wastage;
+    private int batchNumber;
+
 
 
     //constructors
-    public productModel(int id, String name, int quantity, int price, int threshold, int addedDate, int expiryDate, int wastage) {
+    public productModel(int id, String name, int quantity, int price, int threshold, int addedDate, int expiryDate, int wastage, int batchNumber) {
         this.id = id;
         Name = name;
         this.quantity = quantity;
@@ -24,6 +26,7 @@ public class productModel {
         this.addedDate = addedDate;
         this.expiryDate = expiryDate;
         this.wastage = wastage;
+        this.batchNumber = batchNumber;
     }
 
     public productModel() {
@@ -32,11 +35,10 @@ public class productModel {
 
     @Override
     public String toString() {
-        return "id=" + id +
-                ", Name='" + Name + '\'' +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", threshold=" + threshold;
+        return "id= " + id +
+                ", Name= '" + Name + '\'' +
+                ", Quantity= " + quantity +
+                ", Price= " + price;
     }
 
     public int getId() {
@@ -101,5 +103,13 @@ public class productModel {
 
     public void setWastage(int wastage) {
         this.wastage = wastage;
+    }
+
+    public int getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(int batchNumber) {
+        this.batchNumber = batchNumber;
     }
 }

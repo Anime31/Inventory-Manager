@@ -41,27 +41,29 @@ public class InventoryControlHelperActivity extends AppCompatActivity {
         else if (Objects.equals(str,"Expired Items")) {
             productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getExpired());
         }
-        else {
+        else if (Objects.equals(str,"Perishable Items")){
             productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getPerishable());
         }
+//        else if (Objects.equals(str,"Wasted Items")){
+//            productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getPerishable());
+//        }
 
         lv_inventoryHelper.setAdapter(productArrayAdapter);
 
         //on clicking a product open its details
+        lv_inventoryHelper.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-//        lv_inventoryHelper.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
-//
-//                String str = clickedProduct.getName();
-//                Intent intent = new Intent(InventoryControlHelperActivity.this, ProductDetailsActivity.class);
-//                intent.putExtra("key@123", str);
-//
-//                startActivity(intent);
-//            }
-//        });
+                productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
+
+                String str = clickedProduct.getName();
+                Intent intent = new Intent(InventoryControlHelperActivity.this, ProductDetailsActivity.class);
+                intent.putExtra("key@123", str);
+
+                startActivity(intent);
+            }
+        });
 
     }
 }

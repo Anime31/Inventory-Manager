@@ -13,9 +13,9 @@
         android:layout_height="100dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="200dp"
+        android:background="@drawable/up_down_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_up_float" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -23,9 +23,9 @@
         android:layout_height="100dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="50dp"
+        android:background="@drawable/magnify_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -33,9 +33,9 @@
         android:layout_height="100dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
+        android:background="@drawable/add_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
     <ImageButton
         android:id="@+id/btn_info"
@@ -43,7 +43,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="100dp"
+        android:background="@drawable/info_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

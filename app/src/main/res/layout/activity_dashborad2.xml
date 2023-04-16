@@ -26,6 +26,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/et_batch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="#30ffffff"
+        android:ems="10"
+        android:hint="Batch No."
+        android:inputType="number"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_productName" />
+
+    <EditText
         android:id="@+id/et_quantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,7 +59,7 @@
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_productName" />
+        app:layout_constraintTop_toBottomOf="@+id/et_batch" />
 
     <Button
         android:id="@+id/btn_viewAll"
