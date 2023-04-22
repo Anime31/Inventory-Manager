@@ -38,7 +38,8 @@ public class productModel {
         return "id= " + id +
                 ", Name= '" + Name + '\'' +
                 ", Quantity= " + quantity +
-                ", Price= " + price;
+                ", Price= " + price +
+                ", Waste= " + wastage;
     }
 
     public int getId() {

@@ -342,6 +342,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    public List<productModel> getWasted() {
+        List<productModel> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM PRODUCT_TABLE WHERE WASTAGE IS NOT NULL";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                String productName = cursor.getString(1);
+                int productQuantity = cursor.getInt(2);
+                int productPrice = cursor.getInt(3);
+                int productThreshold = cursor.getInt(4);
+                int productAdded = cursor.getInt(5);
+                int productExpiry = cursor.getInt(6);
+                int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
+
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
+
+                returnList.add(newProduct);
+
+            }while (cursor.moveToNext());
+
+        }
+
+        else {
+            //do not add anything to the list
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
     public void addWastage(productModel product, int wastage) {
 
         int productID = product.getId();
@@ -370,4 +411,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public List<productModel> getFilteredProductSearch(int minQuantity, int maxQuantity, int minPrice, int maxPrice, int minExpiry, int maxExpiry) {
+        List<productModel> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM PRODUCT_TABLE WHERE PRODUCT_QUANTITY >= " + minQuantity +
+                " AND PRODUCT_QUANTITY <= " + maxQuantity +
+                " AND PRICE >= " + minPrice +
+                " AND PRICE <= " + maxPrice +
+                " AND EXPIRY_DATE >= " + minExpiry +
+                " AND EXPIRY_DATE <= " + maxExpiry;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                String productName = cursor.getString(1);
+                int productQuantity = cursor.getInt(2);
+                int productPrice = cursor.getInt(3);
+                int productThreshold = cursor.getInt(4);
+                int productAdded = cursor.getInt(5);
+                int productExpiry = cursor.getInt(6);
+                int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
+
+                productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
+
+                returnList.add(newProduct);
+
+            }while (cursor.moveToNext());
+
+        }
+
+        else {
+            //do not add anything to the list
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
 }

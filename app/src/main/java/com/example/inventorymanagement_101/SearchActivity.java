@@ -18,11 +18,11 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
 
     SearchView sv_product;
-    Button btn_search;
+    Button btn_search, btn_filter;
     ListView lv_searchProduct;
     DatabaseHelper databaseHelper;
     ArrayAdapter productArrayAdapter;
-    List<productModel> allProduct;
+    List<productModel> allProduct, filteredSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,24 @@ public class SearchActivity extends AppCompatActivity {
 
         sv_product = findViewById(R.id.sv_product);
         btn_search = findViewById(R.id.btn_search);
+        btn_filter = findViewById(R.id.btn_filter);
         lv_searchProduct = findViewById(R.id.lv_searchProduct);
+
+        Intent intent = getIntent();    // from FilterActivity
+
+        Integer minQuantity = intent.getIntExtra("minQuantity",0);
+        Integer maxQuantity = intent.getIntExtra("maxQuantity", Integer.MAX_VALUE);
+        Integer minPrice = intent.getIntExtra("minPrice", 0);
+        Integer maxPrice = intent.getIntExtra("maxPrice", Integer.MAX_VALUE);
+        Integer minExpiry = intent.getIntExtra("minExpiry", 0);
+        Integer maxExpiry = intent.getIntExtra("maxExpiry", Integer.MAX_VALUE);
+
+//        System.out.println(minQuantity);
+//        System.out.println(maxQuantity);
+        System.out.println(minExpiry);
+        System.out.println(maxExpiry);
+
+
 
         databaseHelper = new DatabaseHelper(SearchActivity.this);
         allProduct = databaseHelper.getAll();
@@ -70,6 +87,27 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        btn_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SearchActivity.this, FilterActivity.class));
+            }
+        });
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                filteredSearch = databaseHelper.getFilteredProductSearch(minQuantity, maxQuantity, minPrice, maxPrice, minExpiry, maxExpiry);
+                productArrayAdapter = new ArrayAdapter<productModel>(SearchActivity.this, android.R.layout.simple_list_item_1, filteredSearch);
+                lv_searchProduct.setAdapter(productArrayAdapter);
+            }
+        });
+
+
+
+
 
         lv_searchProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

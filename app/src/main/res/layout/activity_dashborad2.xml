@@ -84,6 +84,7 @@
         android:id="@+id/lv_productList"
         android:layout_width="404dp"
         android:layout_height="370dp"
+        android:background="#30ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_viewAll" />

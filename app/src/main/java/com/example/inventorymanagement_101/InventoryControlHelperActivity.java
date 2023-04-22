@@ -35,7 +35,6 @@ public class InventoryControlHelperActivity extends AppCompatActivity {
         tv_heading.setText(str);
 
         if(Objects.equals(str, "Scarce Items")) {
-
             productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getScarce());
         }
         else if (Objects.equals(str,"Expired Items")) {
@@ -44,9 +43,9 @@ public class InventoryControlHelperActivity extends AppCompatActivity {
         else if (Objects.equals(str,"Perishable Items")){
             productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getPerishable());
         }
-//        else if (Objects.equals(str,"Wasted Items")){
-//            productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getPerishable());
-//        }
+        else if (Objects.equals(str,"Wasted Items")){
+            productArrayAdapter = new ArrayAdapter<productModel>(InventoryControlHelperActivity.this, android.R.layout.simple_list_item_1, databaseHelper.getWasted());
+        }
 
         lv_inventoryHelper.setAdapter(productArrayAdapter);
 

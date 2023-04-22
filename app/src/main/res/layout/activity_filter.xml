@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FilterActivity">
+
+    <CheckBox
+        android:id="@+id/cb_quantity"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/Quantity"
+        app:layout_constraintEnd_toStartOf="@id/et_minQuantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_minQuantity"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Lower Limit"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cb_quantity"
+        app:layout_constraintTop_toTopOf="@+id/cb_quantity" />
+
+    <EditText
+        android:id="@+id/et_maxQuantity"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Upper Limit"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/et_minQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/et_minQuantity" />
+
+    <CheckBox
+        android:id="@+id/cb_price"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Price"
+        app:layout_constraintEnd_toStartOf="@id/et_minPrice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_quantity" />
+
+    <EditText
+        android:id="@+id/et_minPrice"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Lower Limit"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cb_price"
+        app:layout_constraintTop_toTopOf="@+id/cb_price" />
+
+    <EditText
+        android:id="@+id/et_maxPrice"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Upper Limit"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/et_minPrice"
+        app:layout_constraintTop_toBottomOf="@+id/et_minPrice" />
+
+    <CheckBox
+        android:id="@+id/cb_expiry"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Expiry Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_price"
+        app:layout_constraintEnd_toStartOf="@id/btn_expiryAfter"/>
+
+    <Button
+        android:id="@+id/btn_expiryAfter"
+        style="?android:spinnerStyle"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:onClick="openDatePicker1"
+        android:text="JAN 01 2023"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cb_expiry"
+        app:layout_constraintTop_toTopOf="@+id/cb_expiry" />
+
+    <Button
+        android:id="@+id/btn_expiryBefore"
+        style="?android:spinnerStyle"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="openDatePicker2"
+        android:text="JAN 01 2023"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/btn_expiryAfter"
+        app:layout_constraintTop_toBottomOf="@+id/btn_expiryAfter" />
+
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:text="Clear Filter"
+        app:layout_constraintEnd_toStartOf="@id/btn_done"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_expiry" />
+
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_clear"
+        app:layout_constraintTop_toTopOf="@+id/btn_clear" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
