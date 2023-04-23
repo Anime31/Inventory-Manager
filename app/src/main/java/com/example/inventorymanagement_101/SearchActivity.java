@@ -45,8 +45,8 @@ public class SearchActivity extends AppCompatActivity {
 
 //        System.out.println(minQuantity);
 //        System.out.println(maxQuantity);
-        System.out.println(minExpiry);
-        System.out.println(maxExpiry);
+//        System.out.println(minExpiry);
+//        System.out.println(maxExpiry);
 
 
 
@@ -104,8 +104,6 @@ public class SearchActivity extends AppCompatActivity {
                 lv_searchProduct.setAdapter(productArrayAdapter);
             }
         });
-
-
 
 
 

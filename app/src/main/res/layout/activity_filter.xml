@@ -38,6 +38,16 @@
         app:layout_constraintStart_toStartOf="@+id/et_minQuantity"
         app:layout_constraintTop_toBottomOf="@+id/et_minQuantity" />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="#03A9F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_maxQuantity" />
+
     <CheckBox
         android:id="@+id/cb_price"
         android:layout_width="100dp"
@@ -69,6 +79,15 @@
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/et_minPrice"
         app:layout_constraintTop_toBottomOf="@+id/et_minPrice" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="#03A9F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_maxPrice" />
 
     <CheckBox
         android:id="@+id/cb_expiry"
@@ -103,6 +122,15 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/btn_expiryAfter"
         app:layout_constraintTop_toBottomOf="@+id/btn_expiryAfter" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:background="#03A9F4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_expiryBefore" />
 
     <Button
         android:id="@+id/btn_clear"

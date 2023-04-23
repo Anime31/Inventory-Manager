@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
@@ -13,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Vector;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -442,6 +444,102 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 productModel newProduct = new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
 
                 returnList.add(newProduct);
+
+            }while (cursor.moveToNext());
+
+        }
+
+        else {
+            //do not add anything to the list
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
+    public List<Pair<Integer, Integer>> plotQuantity() {
+        List<Pair<Integer, Integer>> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM PRODUCT_TABLE";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                int productQuantity = cursor.getInt(2);
+
+                returnList.add(new Pair<Integer, Integer>(productID, productQuantity));
+
+            }while (cursor.moveToNext());
+
+        }
+
+        else {
+            //do not add anything to the list
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
+    public List<Pair<Integer, Integer>> plotPrice() {
+        List<Pair<Integer, Integer>> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM PRODUCT_TABLE";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                int productPrice = cursor.getInt(3);
+
+                returnList.add(new Pair<Integer, Integer>(productID, productPrice));
+
+            }while (cursor.moveToNext());
+
+        }
+
+        else {
+            //do not add anything to the list
+        }
+
+        cursor.close();
+        db.close();
+
+        return returnList;
+    }
+
+    public List<Pair<Integer, Integer>> plotWastage() {
+        List<Pair<Integer, Integer>> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM PRODUCT_TABLE";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                int productWastage = cursor.getInt(7);
+
+                returnList.add(new Pair<Integer, Integer>(productID, productWastage));
 
             }while (cursor.moveToNext());
 

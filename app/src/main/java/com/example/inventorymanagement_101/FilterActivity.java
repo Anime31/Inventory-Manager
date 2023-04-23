@@ -81,7 +81,6 @@ public class FilterActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     //On click listeners
