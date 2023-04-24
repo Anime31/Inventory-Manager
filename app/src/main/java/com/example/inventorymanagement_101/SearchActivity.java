@@ -114,8 +114,10 @@ public class SearchActivity extends AppCompatActivity {
                 productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
 
                 String str = clickedProduct.getName();
+                int id = clickedProduct.getId();
                 Intent intent = new Intent(SearchActivity.this, ProductDetailsActivity.class);
-                intent.putExtra("key@123", str);
+                intent.putExtra("id", id);
+                intent.putExtra("name", str);
 
                 startActivity(intent);
             }

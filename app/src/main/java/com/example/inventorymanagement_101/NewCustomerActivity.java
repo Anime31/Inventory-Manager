@@ -56,6 +56,7 @@ public class NewCustomerActivity extends AppCompatActivity {
                 DatabaseHelper databaseHelper = new DatabaseHelper(NewCustomerActivity.this);
                 productModel product = databaseHelper.findProduct(et_customerProduct.getText().toString());
 
+                //If product not found
                 if(product.getQuantity()==0) {
                     Toast.makeText(NewCustomerActivity.this, "Product Not Available", Toast.LENGTH_SHORT).show();
                 }
@@ -65,15 +66,23 @@ public class NewCustomerActivity extends AppCompatActivity {
 
                     if(currentQuantity >= requiredQuantity) {
                         int newQuantity = currentQuantity - requiredQuantity;
-                        product.setQuantity(newQuantity);
+//                        product.setQuantity(newQuantity);
+//
+//                        //delete product
+//                        databaseHelper.deleteOne(product);
+//
+//                        //add product with new quantity(>0)
+//                        if(newQuantity > 0) {
+//                            databaseHelper.addOne(product);
+//                        }
 
-                        //delete product
-                        databaseHelper.deleteOne(product);
-
-                        //add product with new quantity(>0)
-                        if(newQuantity > 0) {
-                            databaseHelper.addOne(product);
+                        if(newQuantity==0) {
+                            databaseHelper.deleteOne(product);
                         }
+                        else {
+                            databaseHelper.updateProduct(product,newQuantity);
+                        }
+
 
                         Toast.makeText(NewCustomerActivity.this, "Product Added", Toast.LENGTH_SHORT).show();
                         et_bill.append(et_customerProduct.getText().toString()

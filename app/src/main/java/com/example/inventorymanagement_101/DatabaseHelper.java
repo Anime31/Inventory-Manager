@@ -134,6 +134,90 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return new productModel(-1,"N/A",0,0,0,currentDate(),currentDate(),0,0);
     }
 
+    public productModel findProduct(int id) {
+
+        //getting data from database
+        String queryString = "SELECT * FROM " + PRODUCT_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                String productName = cursor.getString(1);
+                int productQuantity = cursor.getInt(2);
+                int productPrice = cursor.getInt(3);
+                int productThreshold = cursor.getInt(4);
+                int productAdded = cursor.getInt(5);
+                int productExpiry = cursor.getInt(6);
+                int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
+
+
+                if(productID==id) {
+//                    System.out.println("found");
+                    return new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
+                }
+
+            }while (cursor.moveToNext());
+
+        }
+        else {
+            //do nothing
+        }
+
+        cursor.close();
+        db.close();
+
+        return new productModel(-1,"N/A",0,0,0,currentDate(),currentDate(),0,0);
+    }
+
+    public productModel findProduct(String s, int batch, int price, int expiry) {
+
+        //getting data from database
+        String queryString = "SELECT * FROM " + PRODUCT_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst()) {
+            //loop through the cursor (result set) and create new product objects and put them into returnList
+
+            do {
+
+                int productID = cursor.getInt(0);
+                String productName = cursor.getString(1);
+                int productQuantity = cursor.getInt(2);
+                int productPrice = cursor.getInt(3);
+                int productThreshold = cursor.getInt(4);
+                int productAdded = cursor.getInt(5);
+                int productExpiry = cursor.getInt(6);
+                int productWastage = cursor.getInt(7);
+                int productBatch = cursor.getInt(8);
+
+
+                if(Objects.equals(productName, s) && productBatch==batch && productPrice==price && productExpiry==expiry) {
+//                    System.out.println("found");
+                    return new productModel(productID,productName,productQuantity,productPrice,productThreshold,productAdded,productExpiry,productWastage,productBatch);
+                }
+
+            }while (cursor.moveToNext());
+
+        }
+        else {
+            //do nothing
+        }
+
+        cursor.close();
+        db.close();
+
+        return new productModel(-1,"N/A",0,0,0,currentDate(),currentDate(),0,0);
+    }
+
     //update the quantity of product with PRODUCT_NAME = productName
     public void updateProduct(productModel product, int newQuantity) {
 
@@ -145,20 +229,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int productAdded = product.getAddedDate();
         int productExpiry = product.getExpiryDate();
         int productWastage = product.getWastage();
+        int productBatch = product.getBatchNumber();
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_PRODUCT_NAME, productName);
         cv.put(COLUMN_PRODUCT_QUANTITY, newQuantity);
-//        cv.put(COLUMN_PRICE, productPrice);
+        cv.put(COLUMN_PRICE, productPrice);
 //        cv.put(COLUMN_THRESHOLD, productThreshold);
 //        cv.put(COLUMN_ADDED_DATE, productAdded);
-//        cv.put(COLUMN_EXPIRY_DATE, productExpiry);
+        cv.put(COLUMN_EXPIRY_DATE, productExpiry);
 //        cv.put(COLUMN_WASTAGE, productWastage);
 
 
-        db.update(PRODUCT_TABLE, cv, "PRODUCT_NAME=?", new String[]{productName});
+        db.update(PRODUCT_TABLE, cv, "PRODUCT_NAME=? AND BATCH_NUMBER=? AND PRICE=? AND EXPIRY_DATE=?",
+                new String[]{productName, String.valueOf(productBatch), String.valueOf(productPrice), String.valueOf(productExpiry)});
         db.close();
 
     }

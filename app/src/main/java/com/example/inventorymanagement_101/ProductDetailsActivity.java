@@ -42,12 +42,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String str = intent.getStringExtra("key@123");
+        String str = intent.getStringExtra("name");
+        int id = intent.getIntExtra("id",0);
 
         tv_productName.setText(str);
 
         databaseHelper = new DatabaseHelper(ProductDetailsActivity.this);
-        productModel product = databaseHelper.findProduct(str);
+        productModel product = databaseHelper.findProduct(id);
 
         tv_showId.setText(String.valueOf(product.getId()));
         tv_showBatchNum.setText(String.valueOf(product.getBatchNumber()));

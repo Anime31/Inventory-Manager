@@ -52,6 +52,9 @@ public class Dashborad2Activity extends AppCompatActivity {
         initDatePicker();
         btn_expiryDatePicker.setText(getTodaysDate());
 
+        expiryDateInt = currentDate();
+        addedDateInt = currentDate();
+
 
 //        System.out.println(btn_expiryDatePicker.getText().toString());
 
@@ -77,7 +80,10 @@ public class Dashborad2Activity extends AppCompatActivity {
                     DatabaseHelper databaseHelper = new DatabaseHelper(Dashborad2Activity.this);
 
                     // If product is present then increment the quantity
-                    productModel productModel1 = databaseHelper.findProduct(et_productName.getText().toString());
+                    productModel productModel1 = databaseHelper.findProduct(et_productName.getText().toString(),
+                            Integer.parseInt(et_batch.getText().toString()),
+                            Integer.parseInt(et_price.getText().toString()),
+                            expiryDateInt);
 
                     int previousQuantity = productModel1.getQuantity();
                     int increment = productModel.getQuantity();
@@ -129,8 +135,10 @@ public class Dashborad2Activity extends AppCompatActivity {
                 productModel clickedProduct = (productModel) adapterView.getItemAtPosition(i);
 
                 String str = clickedProduct.getName();
+                int id = clickedProduct.getId();
                 Intent intent = new Intent(Dashborad2Activity.this, ProductDetailsActivity.class);
-                intent.putExtra("key@123", str);
+                intent.putExtra("id", id);
+                intent.putExtra("name", str);
 
                 startActivity(intent);
             }
